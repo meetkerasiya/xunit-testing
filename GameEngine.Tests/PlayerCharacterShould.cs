@@ -113,5 +113,52 @@ namespace GameEngine.Tests
             Assert.Null(sut.Nickname);
            // Assert.NotNull(sut.Nickname);
         }
+
+        [Fact]
+        public void HaveALongBow()
+        {
+            PlayerCharacter sut = new PlayerCharacter();
+
+            Assert.Contains("Long Bow", sut.Weapons);
+        }
+        
+        [Fact]
+        public void NotHaveAStaffOfWonder()
+        {
+            PlayerCharacter sut = new PlayerCharacter();
+
+            Assert.DoesNotContain("staff of Wonder", sut.Weapons);
+        }
+
+        [Fact]
+        public void HaveAtLeastOneKindOfSword()
+        {
+            PlayerCharacter sut = new PlayerCharacter();
+
+            Assert.Contains(sut.Weapons, wepon => wepon.Contains("Sword"));
+        }
+
+        [Fact]
+        public void HaveAllExpectedWeapons()
+        {
+            PlayerCharacter sut = new PlayerCharacter();
+            var expectedWeapons = new []
+            {
+                "Long Bow",
+                "Short Bow",
+                "Short Sword"
+            };
+
+            Assert.Equal(expectedWeapons, sut.Weapons);
+
+        }
+
+        [Fact]
+        public void HaveNoExpectedWeapons()
+        {
+            PlayerCharacter sut = new PlayerCharacter();
+            Assert.All(sut.Weapons, weapon => Assert.False(string.IsNullOrWhiteSpace(weapon)));
+            //To check that no weapon is null
+        }
     }
 }
